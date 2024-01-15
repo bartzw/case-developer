@@ -50,7 +50,7 @@ class PensionServiceTest {
         when(employment.getAvailablePremium()).thenReturn(BigDecimal.valueOf(5));
         when(employment.getFranchise()).thenReturn(BigDecimal.valueOf(15599.00));
 
-        Assertions.assertEquals(BigDecimal.valueOf(expectedPensionValue), pensionService.getExpectedPensionValue(1L, expectedPensionAge));
+        Assertions.assertEquals(BigDecimal.valueOf(expectedPensionValue), pensionService.getExpectedPensionValue(1L, expectedPensionAge).getExpectedPension());
     }
 
     @Test

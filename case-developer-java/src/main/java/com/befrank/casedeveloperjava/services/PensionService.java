@@ -2,6 +2,7 @@ package com.befrank.casedeveloperjava.services;
 
 import com.befrank.casedeveloperjava.mockapi.InvestmentServiceClient;
 import com.befrank.casedeveloperjava.models.Participant;
+import com.befrank.casedeveloperjava.models.Pension;
 import com.befrank.casedeveloperjava.repositories.ParticipantRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,17 @@ public class PensionService {
         this.investmentServiceClient = investmentServiceClient;
     }
 
-    public BigDecimal getExpectedPensionValue(long id, int expectedPensionAge) {
+    public Pension getExpectedPensionValue(long id, int expectedPensionAge) {
         Participant participant = getParticipant(id);
         long pensionAccountNumber = participant.getPensionAccountNumber();
         BigDecimal currentPensionValue = getCurrentPensionValueForAccount(pensionAccountNumber);
         PensionCalculator pensionCalculator = new PensionCalculator();
+        BigDecimal expectedPension = pensionCalculator.calculatePensionForAge(participant, currentPensionValue, expectedPensionAge);
 
-        return pensionCalculator.calculatePensionForAge(participant, currentPensionValue, expectedPensionAge);
+        return Pension.builder()
+                .expectedPension(expectedPension)
+                .forAge(expectedPensionAge)
+                .build();
     }
 
     private Participant getParticipant(long id) {
