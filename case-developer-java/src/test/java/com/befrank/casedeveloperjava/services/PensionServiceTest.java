@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -68,10 +69,13 @@ class PensionServiceTest {
         Assertions.assertThrows(PensionAccountNotFoundException.class, () -> pensionService.getExpectedPensionValue(1L, 60));
     }
 
-/*    @Test
+    @Test
     void calculateYearlyPremium_whenParticipantIsNotEmployed() {
+        when(participantRepository.findById(1L)).thenReturn(Optional.ofNullable(participant));
+        when(participant.getDateOfBirth()).thenReturn(LocalDate.now().minusYears(60L));
+        when(participant.getPensionAccountNumber()).thenReturn(1000L);
         when(participant.isEmployed()).thenReturn(false);
 
-        Assertions.assertEquals(BigDecimal.valueOf(0), pensionService.calculateYearlyPremium(participant));
-    }*/
+        Assertions.assertEquals(BigDecimal.valueOf(103000.00).setScale(2, RoundingMode.HALF_UP), pensionService.getExpectedPensionValue(1L, 61).getExpectedPension());
+    }
 }
