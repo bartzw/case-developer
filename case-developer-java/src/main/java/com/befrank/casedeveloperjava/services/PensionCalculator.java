@@ -18,9 +18,7 @@ public class PensionCalculator {
 
         for (int year = 1; year <= yearsToCalculate; year++) {
             BigDecimal returns = getReturns(currentPensionValue, yearlyPremium);
-            currentPensionValue = currentPensionValue
-                    .add(yearlyPremium)
-                    .add(returns);
+            currentPensionValue = calculateNewPensionValue(currentPensionValue, yearlyPremium, returns);
         }
         return currentPensionValue.setScale(2, RoundingMode.HALF_UP);
     }
@@ -29,6 +27,10 @@ public class PensionCalculator {
         return currentPensionValue
                 .add(yearlyPremium.divide(BigDecimal.valueOf(2)))
                 .multiply(RETURN_RATE);
+    }
+
+    private BigDecimal calculateNewPensionValue(BigDecimal currentPensionValue, BigDecimal yearlyPremium, BigDecimal returns) {
+        return currentPensionValue.add(yearlyPremium).add(returns);
     }
 
     private BigDecimal calculateYearlyPremium(Participant participant) {
@@ -47,6 +49,6 @@ public class PensionCalculator {
                     .multiply(premiumPercentage).setScale(2, RoundingMode.HALF_UP);
         }
 
-        return BigDecimal.valueOf(0);
+        return BigDecimal.ZERO;
     }
 }

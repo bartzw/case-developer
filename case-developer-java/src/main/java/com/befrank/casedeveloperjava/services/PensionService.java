@@ -12,8 +12,8 @@ import java.util.Optional;
 @Service
 public class PensionService {
 
-    ParticipantRepository participantRepository;
-    InvestmentServiceClient investmentServiceClient;
+    private final ParticipantRepository participantRepository;
+    private final InvestmentServiceClient investmentServiceClient;
 
     public PensionService(ParticipantRepository participantRepository, InvestmentServiceClient investmentServiceClient) {
         this.participantRepository = participantRepository;
@@ -36,7 +36,7 @@ public class PensionService {
     private Participant getParticipant(long id) {
         Optional<Participant> participant = participantRepository.findById(id);
         if (participant.isEmpty()) {
-            throw new ParticipantNotFoundException();
+            throw new ParticipantNotFoundException(String.format("Could not find participant for id: %s", id));
         }
         return participant.get();
     }
@@ -44,7 +44,7 @@ public class PensionService {
     private BigDecimal getCurrentPensionValueForAccount(long pensionAccountNumber) {
         BigDecimal currentValue = investmentServiceClient.getCurrentValue(pensionAccountNumber);
         if (currentValue == null) {
-            throw new PensionAccountNotFoundException();
+            throw new PensionAccountNotFoundException(String.format("Could not find Pension account for number: %s", pensionAccountNumber));
         }
         return currentValue;
     }
