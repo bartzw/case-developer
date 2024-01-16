@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Participant} from "../model/participant";
 import {ParticipantService} from "../service/participant-service.service";
 import {CommonModule} from "@angular/common";
-import {ParticipantFormComponent} from "../user-form/participant-form.component";
+import {PensionFormComponent} from "../pension-form/pension-form.component";
 import {Pension} from "../model/pension";
 
 @Component({
   selector: 'participant',
   standalone: true,
-  imports: [CommonModule, ParticipantFormComponent],
+  imports: [CommonModule, PensionFormComponent],
   templateUrl: './participant.component.html',
 })
 export class ParticipantComponent implements OnInit {

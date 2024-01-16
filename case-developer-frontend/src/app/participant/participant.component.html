@@ -1,12 +1,11 @@
 <div class="card my-5">
     <div class="card-body">
+        <h2>Gegevens deelnemer</h2>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Naam</th>
                 <th scope="col">Adres</th>
-                <th scope="col">Salaris</th>
                 <th scope="col">Pensioen rekening nummber</th>
                 <th scope="col">Geboorte datum</th>
                 <th scope="col">Email</th>
@@ -14,16 +13,37 @@
             </thead>
             <tbody>
             <tr *ngIf="participant">
-                <td>{{ participant.id }}</td>
                 <td>{{ participant.name }}</td>
                 <td>{{ participant.address }}</td>
-                <td>{{ participant.employment.fulltimeSalary }}</td>
                 <td>{{ participant.pensionAccountNumber }}</td>
                 <td>{{ participant.dateOfBirth }}</td>
                 <td><a href="mailto:{{ participant.email }}">{{ participant.email }}</a></td>
             </tr>
             </tbody>
         </table>
+        <br>
+        <h2>Salaris deelnemer</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Fulltime salaris</th>
+                <th scope="col">Parttime Percentage</th>
+                <th scope="col">Franchise</th>
+                <th scope="col">Beschikbaar premie percentage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="participant && participant.employment">
+                <td>{{ participant.employment.fulltimeSalary }}</td>
+                <td>{{ participant.employment.parttimePercentage }}</td>
+                <td>{{ participant.employment.franchise }}</td>
+                <td>{{ participant.employment.availablePremium }}</td>
+            </tr>
+            </tbody>
+        </table>
+
         <pension-form (pension)="handlePension($event)"></pension-form>
+        <div>Verwacht pension</div>
+        <h2>{{ pension.expectedPension }}</h2>
     </div>
 </div>
