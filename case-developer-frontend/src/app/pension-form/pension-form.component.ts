@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import {PensionService} from "../service/pension-service.service";
+import {PensionService} from "../services/pension-service.service";
 import {FormsModule} from "@angular/forms";
-import {Pension} from "../model/pension";
+import {Pension} from "../models/pension";
 
 @Component({
   selector: 'pension-form',

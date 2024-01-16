@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Participant} from "../model/participant";
-import {ParticipantService} from "../service/participant-service.service";
+import {Participant} from "../models/participant";
+import {ParticipantService} from "../services/participant-service.service";
 import {CommonModule} from "@angular/common";
 import {PensionFormComponent} from "../pension-form/pension-form.component";
-import {Pension} from "../model/pension";
+import {Pension} from "../models/pension";
 
 @Component({
   selector: 'participant',

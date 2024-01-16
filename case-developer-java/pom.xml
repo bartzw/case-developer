@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>17</java.version>
 		<projectlombok.version>1.18.30</projectlombok.version>
-		<apachecommons.version>2.8.0</apachecommons.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,11 +35,6 @@
 			<artifactId>lombok</artifactId>
 			<version>${projectlombok.version}</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${apachecommons.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
